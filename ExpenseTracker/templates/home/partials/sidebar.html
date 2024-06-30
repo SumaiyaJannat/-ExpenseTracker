@@ -1,0 +1,51 @@
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Home</div>
+                    <a class="nav-link" href="index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                       My Expense
+                    </a>
+                    <a class="nav-link" href="/budget">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                              My Budget</a>
+
+                            
+
+                                      <div class="messages" id="alert-message">
+                                        <div class="sb-sidenav-menu-heading">Summary</div>
+
+                                      <a class="nav-link " href="/summary">
+                                       <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                RECORD
+                                       </a>
+                   
+                                            
+                  
+                   
+                    <div class="messages" id="alert-message">
+                    <div class="sb-sidenav-menu-heading">List</div>
+                    {% comment %} <a class="nav-link" href="/charts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Charts
+                    </a> {% endcomment %}
+                    <a class="nav-link" href="/category">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                              Category List</a>
+                    <a class="nav-link" href="/tables">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Expenses List
+                    </a>
+            </div>
+            </div>
+            </div>
+            </div>
+           <br>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                {{request.user.username}}
+            </div>
+        </nav>
+    </div>

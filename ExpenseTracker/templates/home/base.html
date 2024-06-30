@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'addmoney.css' %}">
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    {% include 'home/partials/navbar.html' %}
+    </div>
+    {% include 'home/partials/sidebar.html' %}
+    <div id="layoutSidenav_content">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show my-10" role="alert">
+            <!-- <strong>Message :</strong> -->
+            <i class="fas fa-exclamation-circle"></i>
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+
+        <main>
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

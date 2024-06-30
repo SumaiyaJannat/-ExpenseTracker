@@ -1,0 +1,88 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Expense Tracker - History{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'addmoney.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mt-2">Expense Tracker</h1>
+<div class="d-flex justify-content-center">
+    <div class="card1" style="width:500px;">
+        <h7><b> Add Expense</b></h7>
+        <button class="b1" onclick="location.href='/addmoney';">
+            <i class="fa fa-plus-circle" style="font-size:25px;color:red"></i>
+        </button>
+    </div>
+</div>
+                        
+                        
+                        <br>
+                      
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                DataTable
+                                <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Amount</th>
+                                                <th>Category</th>
+                                                <th>Date</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                </thead>
+                                <tbody>
+                                {% for info in page_obj %} 
+                                    {% comment %} {% for  info in add_info %} {% endcomment %}
+                                            <tr>
+                                                <td>{{info.title}}</td>
+                                                <td>{{info.quantity}}</td>
+                                                <td>{{info.category}}</td>
+                                                <td>{{info.Date}}</td>
+                                                <td><a href="{% url 'expense_edit' info.id %}" class = " btn btn-success ">Edit</a></td>
+                                                <td><a href="{% url 'expense_delete' info.id %}" class = " btn btn-danger ">Delete</a></td>
+                                            </tr>
+                                 
+                                    {% endfor %}
+                           
+                                </tbody>
+                            </table>
+                        </div>
+                      </div>
+     
+                    <div class="">
+                    Showing page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                    </div>
+                <nav aria-label="Page navigation example">
+            <ul class="pagination align-right float-right mr-auto">
+            {% if page_obj.has_previous %}
+            <li {% if page_obj.number == 1%} class="page-item active" {% endif %}>
+            <a class="page-link" href="?page=1" tabindex="-1">&laquo; first</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif%}
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+            {% endif %}
+    </li>
+  </ul>
+</nav>
+<br>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+{% endblock %}
