@@ -115,26 +115,27 @@ def profile_update(request,id):
 
 def Signup(request):
     if request.method =='POST':
-            username = request.POST["uname"]
-            firstname=request.POST["fname"]
-            lastname=request.POST["lname"]
+            # get the post parameters
+            uname = request.POST["uname"]
+            fname=request.POST["fname"]
+            lname=request.POST["lname"]
             email = request.POST["email"]
             profession = request.POST['profession']
             pass1 = request.POST["pass1"]
             pass2 = request.POST["pass2"]
             profile = UserProfile(profession=profession)
-           
+            # check for errors in input
             if request.method == 'POST':
                 try:
-                    user_exists = User.objects.get(username=request.POST['userame'])
+                    user_exists = User.objects.get(username=request.POST['uname'])
                     messages.error(request," Username already taken, Try something else!!!")
                     return redirect("/register")    
                 except User.DoesNotExist:
-                    if len(username)>15:
+                    if len(uname)>15:
                         messages.error(request," Username must be max 15 characters, Please try again")
                         return redirect("/register")
             
-                    if not username.isalnum():
+                    if not uname.isalnum():
                         messages.error(request," Username should only contain letters and numbers, Please try again")
                         return redirect("/register")
             
@@ -142,14 +143,15 @@ def Signup(request):
                         messages.error(request," Password do not match, Please try again")
                         return redirect("/register")
             
-          
-            user = User.objects.create_user(username, email, pass1)
-            user.first_name=firstname
-            user.last_name=lastname
+            # create the user
+            user = User.objects.create_user(uname, email, pass1)
+            user.first_name=fname
+            user.last_name=lname
             user.email = email
-           
+            # profile = UserProfile.objects.all()
 
             user.save()
+            # p1=profile.save(commit=False)
             profile.user = user
             profile.save()
             messages.success(request," Your account has been successfully created")
@@ -157,6 +159,7 @@ def Signup(request):
     else:
         return HttpResponse('404 - NOT FOUND ')
     return redirect('/login')
+
 
 def login(request):
     if request.method =='POST':
